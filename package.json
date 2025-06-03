@@ -1,0 +1,17 @@
+{
+  "name": "js-rise",
+  "version": "1.0.0",
+  "description": "node js rise learning",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon  fsmodule.js"
+  },
+  "author": "Ankit Raj",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
