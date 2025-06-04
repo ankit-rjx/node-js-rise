@@ -4,7 +4,7 @@
   "description": "node js rise learning",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon  fsmodule.js"
+    "dev": "nodemon  ownServer.js"
   },
   "author": "Ankit Raj",
   "license": "ISC",
