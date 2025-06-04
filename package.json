@@ -9,7 +9,8 @@
   "author": "Ankit Raj",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
