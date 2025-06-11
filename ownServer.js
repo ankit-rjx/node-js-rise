@@ -1,62 +1,43 @@
-// Import the Express framework
 const express = require("express");
-
-// Initialize the Express application
-const app = express();
-
-// Import the MongoDB connection from db.js
-const db = require("./db.js");
-
-// Using bodyParser
 const bodyParser = require("body-parser");
-app.use(bodyParser.json()); // req.body - yaha par sara chej store ho jata hai .
-
+const db = require("./db.js");
 const Person = require("./models/Person.js");
 
-// Define a basic route
+const app = express();
+app.use(bodyParser.json());
+
+// Root route
 app.get("/", (req, res) => {
   res.send("Welcome to My Hotel ... How can I help you!");
 });
 
+// POST route to add a new person
 app.post("/person", async (req, res) => {
   try {
-    const data = req.body; // Assuming the body contains the person data
+    const data = req.body;
     const newPerson = new Person(data);
-    // newPerson.name = data.name;
-    // newPerson.age = data.age;
-    // newPerson.mobile = data.mobile;
-    // newPerson.email = data.email;
-    // newPerson.salary = data.salary;
-    // newPerson.age = data.salary;
-    // newPerson.address = data.address;
-
-    // newPerson.save((error, savedPerson) => {
-    //   if (error) {
-    //     console.log("Error saving person: ", error);
-    //     res.status(500).json({
-    //       error: "Internal Server Error",
-    //     });
-    //   }else{
-    //     console.log('data saved successfully');
-    //     res.status(200).json(savedPerson)
-    //   }
-    // }); // this callback method is no longer exist
-
     const savedPerson = await newPerson.save();
-    console.log("data saved");
+    console.log("Data saved");
     res.status(200).json(savedPerson);
-
-
-
   } catch (error) {
-    console.log(error);
-    res.status(500).json({error:'Internal Server Error'})
+    console.error("Error saving person:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Start the server and listen on port 3000
+// GET route to fetch all people
+app.get("/person", async (req, res) => {
+  try {
+    const data = await Person.find();
+    console.log("Data fetched");
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Start the server
 app.listen(3000, () => {
   console.log("Listening on Port 3000");
 });
-
-// Note: Port 3000 is like a "room number" assigned to our application on localhost
