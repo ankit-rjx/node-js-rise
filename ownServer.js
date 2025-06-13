@@ -52,6 +52,18 @@ app.get("/person", async (req, res) => {
   }
 });
 
+// GET route to fetch all menu
+app.get("/menu", async (req, res) => {
+  try {
+    const data = await Menu.find();
+    res.status(200).json(data);
+    console.log("Data fetched");
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Start the server
 app.listen(3000, () => {
   console.log("Listening on Port 3000");
