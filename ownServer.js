@@ -18,11 +18,25 @@ app.post("/person", async (req, res) => {
     const data = req.body;
     const newPerson = new Person(data);
     const savedPerson = await newPerson.save();
-    console.log("Data saved");
     res.status(200).json(savedPerson);
+    console.log("Data saved");
   } catch (error) {
     console.error("Error saving person:", error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// post  route to ad new menu
+app.post("/menu", async (req, res) => {
+  try {
+    const data = req.body;
+    const newMenu = new Menu(data);
+    const savedMenu = await newMenu.save();
+    res.status(200).json(savedMenu);
+    console.log("Menu Saved");
+  } catch (error) {
+    console.error("Error saving Menu", error);
+    res.status(500).json({ error: "Internal Server error " });
   }
 });
 
